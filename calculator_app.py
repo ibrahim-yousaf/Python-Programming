@@ -24,8 +24,8 @@ class Calculator:
         
         # Button layout
         buttons = [
-            ["7", "8", "9", "/"],
-            ["4", "5", "6", "*"],
+            ["7", "8", "9", "÷"],
+            ["4", "5", "6", "×"],
             ["1", "2", "3", "-"],
             ["0", ".", "=", "+"],
             ["C"]
@@ -66,12 +66,14 @@ class Calculator:
             self.display_var.set("0")
         elif char == "=":
             try:
-                result = eval(current)
+                # Replace symbols with Python operators for eval
+                expression = current.replace("×", "*").replace("÷", "/")
+                result = eval(expression)
                 self.display_var.set(str(result))
             except:
                 self.display_var.set("Error")
         else:
-            if current == "0" and char not in ["+", "-", "*", "/" , "."]:
+            if current == "0" and char not in ["+", "-", "×", "÷" , "."]:
                 self.display_var.set(char)
             else:
                 self.display_var.set(current + char)
